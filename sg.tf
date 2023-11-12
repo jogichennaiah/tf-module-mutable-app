@@ -1,7 +1,8 @@
-# Creates Security Group
+# Creating security group
+
 resource "aws_security_group" "allows_app" {
-  name         = "roboshop-${var.COMPONENT}-${var.ENV}"
-  description  = "roboshop-${var.COMPONENT}-${var.ENV}"
+  name        = "roboshop-$(var.COMPONENT)-$(var.ENV)"
+  description = "roboshop-$(var.COMPONENT)-$(var.ENV)"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
