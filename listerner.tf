@@ -2,7 +2,7 @@ resource "aws_lb_listener" "private" {
   count             = var.INTERNAL ? 1:0
 
   load_balancer_arn = 
-  port              = "80"
+  port              = "8080"
   protocol          = "HTTP"
 
   default_action {
