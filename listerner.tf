@@ -1,7 +1,7 @@
 resource "aws_lb_listener" "private" {
   count             = var.INTERNAL ? 1:0
 
-  load_balancer_arn = aws_lb.front_end.arn
+  load_balancer_arn = 
   port              = "80"
   protocol          = "HTTP"
 
