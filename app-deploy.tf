@@ -12,7 +12,7 @@ resource "null_resource" "app" {
     type     = "ssh"
     user     = local.SSH_USERNAME
     password = local.SSH_PASSWORD
-    host     = element(local.INSTANCE-PRIVATE-IPS, count.index)
+    host     = element(local.INSTANCE_PRIVATE_IPS, count.index)
   }
 
     inline = [
