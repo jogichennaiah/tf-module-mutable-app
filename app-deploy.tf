@@ -16,6 +16,7 @@ resource "null_resource" "app" {
   }
 
     inline = [
+      "sleep 30"
       "ansible-pull -U https://github.com/jogichennaiah/ansible.git -e ENV=dev -e COMPONENT=${var.COMPONENT} roboshop-pull.yml"
     ]
   }
