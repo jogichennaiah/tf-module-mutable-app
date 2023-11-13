@@ -8,6 +8,18 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+# Reads the information from the remote ALB statefile
+
+data "terraform_remote_state" "alb" {
+  backend = "s3"
+  config = {
+    bucket  = "b55-terraform-bucket"
+    key    = "alb/${var.ENV}/terraform.tfstate"
+    region  = "us-east-1" 
+  }
+}
+
+
 # Fetches the information of the secrets
 
 data "aws_secretsmanager_secret" "secrets" {
