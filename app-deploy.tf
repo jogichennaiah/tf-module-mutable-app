@@ -2,7 +2,7 @@
 resource "null_resource" "app" {
 
   triggers = {
-    always_run = "${timesstamp()}"                                # This ensure your provisionerwould be executing all the time
+    always_run = "${timestamp()}"                                # This ensure your provisionerwould be executing all the time
   }
 
   count                   = local.INSTANCE_COUNT
