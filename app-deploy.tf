@@ -16,7 +16,8 @@ resource "null_resource" "app" {
     }
     inline = [
         "sleep 30" , 
-        "ansible-pull -U https://github.com/jogichennaiah/ansible.git -e MONGODB_ENDPOINT=${data.terraform_remote_state.db.outputs.MONGODB_ENDPOINT } -e ENV=dev -e APP_VERSION=${var.APP_VERSION} -e COMPONENT=${var.COMPONENT} roboshop-pull.yml"
+        "ansible-pull -U https://github.com/jogichennaiah/ansible.git -e ENV=dev -e APP_VERSION=${var.APP_VERSION} -e COMPONENT=${var.COMPONENT} roboshop-pull.yml"
     ]
+
   }
 }
