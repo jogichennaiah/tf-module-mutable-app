@@ -2,7 +2,7 @@
 resource "null_resource" "app" {
   count                   = local.INSTANCE_COUNT
 
-  
+  provisioner "remote-exec" {
     connection {
     type     = "ssh"
     user     = local.SSH_USERNAME
@@ -10,7 +10,6 @@ resource "null_resource" "app" {
     host     = element(local.INSTANCE-PRIVATE-IPS, count.index)
   }
 
-  provisioner "remote-exec" {
     inline = [
       "echo hai"
     ]
