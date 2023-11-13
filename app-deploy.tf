@@ -1,5 +1,10 @@
 # Injecting the schema
 resource "null_resource" "app" {
+
+  triggers = {
+    always_run = "${timesstamp()}"                                # This ensure your provisionerwould be executing all the time
+  }
+
   count                   = local.INSTANCE_COUNT
 
   provisioner "remote-exec" {
@@ -11,7 +16,7 @@ resource "null_resource" "app" {
   }
 
     inline = [
-      "echo hai"
+      "ansible-pull -U https://github.com/jogichennaiah/ansible.git -e ENV=dev -e COMPONENT=${var.COMPONENT} roboshop-pull.yml"
     ]
   }
 }
