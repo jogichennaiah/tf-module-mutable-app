@@ -3,7 +3,7 @@
 resource "aws_lb_listener" "public" {
   count             = var.INTERNAL ? 1:0
 
-  load_balancer_arn =  data.terraform_remote_state.alb.outputs.PRIVATE_ALB_ARN
+  load_balancer_arn =  data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
 
   port              = "80"
   protocol          = "HTTP"
