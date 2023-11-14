@@ -25,8 +25,8 @@ resource "random_integer" "priority" {
 resource "aws_lb_listener_rule" "app_rule" {
   count               = var.INTERNAL ? 1 : 0
 
-  listener_arn        = aws_lb_listener.private.*.arn[0]
-  priority            = random_integer.priority.result
+  listener_arn        = aws_lb_listener.public.*.arn[0]
+  priority            = random_integer.priority
 
   action {
     type              = "forward"
