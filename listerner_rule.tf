@@ -1,35 +1,34 @@
-# This creates the listener and adds to the priavte ALB
-
+# Creates Public Listener
+# This creates the listener and adds to the private ALB
 resource "aws_lb_listener" "public" {
-  count             = var.INTERNAL ? 1:0
+  count             = var.INTERNAL ? 0 : 1
 
-  load_balancer_arn =  data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
-
+  load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
   port              = "80"
   protocol          = "HTTP"
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
-    
+      type             = "forward"
+      target_group_arn = aws_lb_target_group.app.arn  
   }
 }
 
-# Generates a rule in the private LoadBalancer Listener
+
+# Generates a Random Number in the given range 
 resource "random_integer" "priority" {
   min = 100
   max = 500
 }
 
-#Creats a rule in the private LoadBalancer Listtner
+#  Creates a rule in the private loadBalancer listener
 resource "aws_lb_listener_rule" "app_rule" {
-  count               = var.INTERNAL ? 1 : 0
+  count             = var.INTERNAL ? 1 : 0
 
-  listener_arn        = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
-  priority            = random_integer.priority.result
+  listener_arn      = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
+  priority          = random_integer.priority.result
 
   action {
-    type              = "forward"
+    type             = "forward"
     target_group_arn = aws_lb_target_group.app.arn
   }
 
