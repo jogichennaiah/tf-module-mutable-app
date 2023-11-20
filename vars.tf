@@ -10,3 +10,4 @@ variable "APP_PORT" {}
 variable "APP_VERSION" {}
 variable "PUBLIC_HOSTED_ZONE_ID" {}
 variable "PRIVATE_HOSTED_ZONE_ID" {}
+
